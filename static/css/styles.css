@@ -1,0 +1,215 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600&display=swap');
+
+/* Reset default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* CSS Variables for theme colors */
+:root {
+    --background-color: #000000;
+    --text-color: #e0e0e0;
+    --primary-color: #00ccff;
+    --secondary-color: #7f00ff;
+}
+
+body {
+    font-family: 'Open Sans', Arial, sans-serif;
+    line-height: 1.6;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    background-image: url('{{ url_for('static', filename='images/starfield.jpg') }}');
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+/* Adjust styles for day/night themes */
+body.day {
+    --background-color: #1a237e;
+    --text-color: #ffffff;
+    --primary-color: #ffcc00;
+    --secondary-color: #ff6600;
+}
+
+body.night {
+    --background-color: #000000;
+    --text-color: #e0e0e0;
+    --primary-color: #00ccff;
+    --secondary-color: #7f00ff;
+}
+
+header, footer {
+    background-color: rgba(15, 15, 30, 0.9);
+    padding: 20px 0;
+    text-align: center;
+    border-bottom: 1px solid #1a1a2e;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+
+header h1 {
+    font-size: 2em;
+    font-weight: 600;
+    color: var(--primary-color);
+    text-shadow: 0 0 10px var(--primary-color);
+}
+
+main.container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.2);
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    backdrop-filter: blur(10px);
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.upload-section h2 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    font-weight: 600;
+    text-align: center;
+    color: var(--secondary-color);
+    text-shadow: 0 0 10px var(--secondary-color);
+}
+
+.message {
+    color: #e74c3c;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+input[type="submit"] {
+    background-color: #00cc66;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 1em;
+    margin-top: 10px;
+    position: relative;
+    overflow: hidden;
+    animation: pulse 2s infinite;
+}
+
+input[type="submit"]:hover {
+    background-color: #00994d;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 10px rgba(0, 204, 102, 0.7), inset 0 0 10px rgba(0, 204, 102, 0.7);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(0, 204, 102, 1), inset 0 0 20px rgba(0, 204, 102, 1);
+    }
+    100% {
+        box-shadow: 0 0 10px rgba(0, 204, 102, 0.7), inset 0 0 10px rgba(0, 204, 102, 0.7);
+    }
+}
+
+/* Disable submit button initially */
+input[type="submit"]:disabled {
+    background-color: #555;
+    cursor: not-allowed;
+    animation: none;
+}
+
+/* Hide the actual file input */
+input[type="file"] {
+    display: none;
+}
+
+/* Style the label as a button */
+.custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: rgba(255,255,255,0.1);
+    font-size: 1em;
+    margin-bottom: 10px;
+    color: #fff;
+    border-radius: 5px;
+    position: relative;
+    overflow: hidden;
+}
+
+.custom-file-upload:hover {
+    background-color: rgba(255,255,255,0.2);
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.custom-file-upload::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+}
+
+.custom-file-upload:hover::after {
+    left: 100%;
+}
+
+.file-name {
+    font-size: 1em;
+    margin-bottom: 20px;
+    color: #e0e0e0;
+    text-align: center;
+}
+
+footer p {
+    font-size: 0.9em;
+    color: var(--primary-color);
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--secondary-color);
+}
+
+/* Accessibility focus styles */
+.custom-file-upload:focus, input[type="submit"]:focus {
+    outline: 2px solid var(--primary-color);
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    header h1, .upload-section h2 {
+        font-size: 1.5em;
+    }
+
+    main.container {
+        margin: 20px auto;
+        padding: 10px;
+    }
+}
+
+header .logo {
+
+    padding: 10px 20px;
+}
+
+header .logo img {
+    height: 150px;
+}
