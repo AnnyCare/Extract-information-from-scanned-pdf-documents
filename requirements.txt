@@ -1,0 +1,40 @@
+# Core dependencies
+numpy==1.26.4
+pandas==2.2.2
+scipy==1.14.1
+
+# Machine Learning and Deep Learning
+tensorflow==2.16.2
+tf_keras==2.16.0
+keras==3.5.0
+torch==2.4.1
+torchaudio==2.4.1
+torchvision==0.19.1
+
+# Image Processing
+opencv-python==4.10.0.84
+pillow==10.4.0
+pdf2image==1.17.0
+PyMuPDF==1.24.10
+pytesseract==0.3.13
+
+# Visualization
+matplotlib==3.9.2
+seaborn==0.13.2
+
+# Web Framework
+Flask==3.0.3
+Jinja2==3.1.4
+
+# Utilities
+Cython==3.0.11
+joblib==1.4.2
+requests==2.32.3
+wheel==0.44.0
+zipp==3.20.2
+
+# Layout Parsing
+layoutparser==0.3.4
+
+# External Repositories
+-e git+https://github.com/facebookresearch/detectron2.git@ebe8b45437f86395352ab13402ba45b75b4d1ddb#egg=detectron2

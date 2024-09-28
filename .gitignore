@@ -11,7 +11,7 @@ myenv/
 .venv/
 
 # Ignore data output directories
-output
+outputs
 .history
 detectron2
 extracted_files
