@@ -20,17 +20,10 @@ extracted_text
 extracted_document
 pdf-for-testing
 uploads
-
+models
+archive
 
 
 # Ignore system files
 .DS_Store
 Thumbs.db
-
-archive
-
- 
-
-
-# Pre-trainned models
-pretrained_model
