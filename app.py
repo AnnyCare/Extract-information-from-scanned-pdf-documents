@@ -13,7 +13,7 @@ app = Flask(__name__)
 config = load_config('config/config.yaml')
 
 # Path to output directory
-output_dir = config["output_base"]  # Path where results will be saved
+output_dir = 'extracted_files'  # Path where results will be saved
 
 # Process the PDF
 
