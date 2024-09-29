@@ -33,7 +33,7 @@
                 <input type="submit" value="Upload and Process" id="submit-button" disabled>
             </form>
             {% if zip_filename %}
-                <p>Your file has been processed. <a href="{{ url_for('download_file', filename=zip_filename) }}">Download Results</a></p>
+                <p>Your file has been processed. <a href="{{ url_for('download_file', filename=zip_filename) }}" id="download-link">Download Results</a></p>
             {% endif %}
         </section>
     </main>

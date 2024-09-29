@@ -30,3 +30,10 @@ window.addEventListener('scroll', function() {
     const scrollPosition = window.pageYOffset;
     document.body.style.backgroundPositionY = (scrollPosition * 0.5) + 'px';
 });
+
+
+document.getElementById('download-link').addEventListener('click', function() {
+    setTimeout(function() {
+        window.location.href = '/';  // Redirect to the home page (reset page)
+    }, 1000);  // Wait 1 second before refreshing the page to allow the download to start
+});
