@@ -2,6 +2,7 @@ import os
 from flask import Flask, request, render_template, send_from_directory # type: ignore
 from werkzeug.utils import secure_filename
 import uuid
+import logging 
 
 # Import your existing processing function
 from src.main import process_pdf
@@ -37,34 +38,39 @@ def allowed_file(filename):
 @app.route('/', methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
-        # Check if the POST request has the file part
-        if 'file' not in request.files:
-            return render_template('index.html', message='No file part in the request')
-        
-        file = request.files['file']
-        if file.filename == '':
-            return render_template('index.html', message='No file selected')
-        
-        if file and allowed_file(file.filename):
-            # Generate a unique filename to prevent collisions
-            filename = secure_filename(file.filename)
-            unique_filename = f"{uuid.uuid4().hex}_{filename}"
-            file_path = os.path.join(app.config['UPLOAD_FOLDER'], unique_filename)
-            file.save(file_path)
+        try:
+            # Check if the POST request has the file part
+            if 'file' not in request.files:
+                logging.warning("No file part in the request.")
+                return render_template('index.html', message='No file part in the request')
+            
+            file = request.files['file']
+            if file.filename == '':
+                logging.warning("No file selected.")
+                return render_template('index.html', message='No file selected')
+            
+            if file and allowed_file(file.filename):
+                # Generate a unique filename to prevent collisions
+                filename = secure_filename(file.filename)
+                unique_filename = f"{uuid.uuid4().hex}_{filename}"
+                file_path = os.path.join(app.config['UPLOAD_FOLDER'], unique_filename)
+                file.save(file_path)
 
-            # Process the uploaded file
-            try:
-                # zip_file_path = process_pdf(file_path, config)
+                # Process the uploaded file
                 zip_file_path = process_pdf(file_path, output_dir)
-                # Extract just the filename part from the full zip file path
                 zip_filename = os.path.basename(zip_file_path)
 
+                logging.info(f"File processed successfully: {zip_filename}")
                 return render_template('index.html', message='File processed successfully', zip_filename=zip_filename)
-            except Exception as e:
-                print(e)
-                return render_template('index.html', message='An error occurred during processing')
-        else:
-            return render_template('index.html', message='Dear user, please try again and upload a valid PDF file.')
+            
+            else:
+                logging.warning("Invalid file type uploaded.")
+                return render_template('index.html', message='Dear user, please try again and upload a valid PDF file.')
+    
+        except Exception as e:
+            logging.error(f"An error occurred during processing: {e}")
+            return render_template('index.html', message='An error occurred while processing the file.')
+    
     else:
         return render_template('index.html')
 
