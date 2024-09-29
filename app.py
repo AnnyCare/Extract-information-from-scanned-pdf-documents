@@ -13,7 +13,7 @@ app = Flask(__name__)
 config = load_config('config/config.yaml')
 
 # User input: Path to the model, PDF, and output directory
-model_weights_path = 'models/model_final_00.pth'  # Path to the trained model
+model_weights_path = 'models/model_final_02.pth'  # Path to the trained model
 output_dir = 'extracted_files'  # Path where results will be saved
 
 # Process the PDF

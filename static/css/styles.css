@@ -21,7 +21,7 @@ body {
     line-height: 1.6;
     background-color: var(--background-color);
     color: var(--text-color);
-    background-image: url('{{ url_for('static', filename='images/starfield.jpg') }}');
+    background-image: url('/static/images/visionBackground.jpg');
     background-size: cover;
     background-attachment: fixed;
 }
@@ -38,7 +38,7 @@ body.night {
     --background-color: #000000;
     --text-color: #e0e0e0;
     --primary-color: #00ccff;
-    --secondary-color: #7f00ff;
+    --secondary-color: #a350f6;
 }
 
 header, footer {

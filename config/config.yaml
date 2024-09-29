@@ -1,5 +1,5 @@
 # config/config.yaml
 
 dpi: 300
-output_base: 'output'
+output_base: 'outputs'
 ocr_language: 'eng'

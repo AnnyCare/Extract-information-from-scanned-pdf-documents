@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+    
 <head>
     <meta charset="UTF-8">
     <title>Document Extraction Application</title>
@@ -7,6 +8,7 @@
     <!-- Link to external CSS file -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
+
 <body>
     <header>
         <div class="logo">
@@ -14,6 +16,7 @@
         </div>
         <h1>Document Extraction Application</h1>
     </header>
+
     <main class="container">
         <section class="upload-section">
             <h2>Upload a PDF Document</h2>
@@ -34,9 +37,11 @@
             {% endif %}
         </section>
     </main>
+
     <footer>
         <p>&copy; 2024 Document Extraction Application - VisionX</p>
     </footer>
+
     <!-- Link to external JavaScript file -->
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
