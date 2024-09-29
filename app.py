@@ -3,6 +3,7 @@ from flask import Flask, request, render_template, send_from_directory # type: i
 from werkzeug.utils import secure_filename
 import uuid
 import logging 
+import shutil  # I WILL USE IT TO CLEAN THE UPLOADS FOLDER
 
 # Import your existing processing function
 from src.main import process_pdf
@@ -50,6 +51,13 @@ def upload_file():
                 return render_template('index.html', message='No file selected')
             
             if file and allowed_file(file.filename):
+
+                # Clear the "extracted_files" folder before saving the new file
+                extracted_files_dir = 'extracted_files'
+                if os.path.exists(extracted_files_dir):
+                    shutil.rmtree(extracted_files_dir)  # Remove the entire directory and its contents
+                os.makedirs(extracted_files_dir, exist_ok=True)  # Recreate the directory
+
                 # Generate a unique filename to prevent collisions
                 filename = secure_filename(file.filename)
                 unique_filename = f"{uuid.uuid4().hex}_{filename}"

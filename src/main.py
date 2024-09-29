@@ -38,7 +38,7 @@ def setup_predictor():
         cfg = get_cfg()
         cfg.merge_from_file(model_zoo.get_config_file("COCO-Detection/faster_rcnn_R_50_FPN_3x.yaml"))  # Adjust if your model config is different
         cfg.MODEL.WEIGHTS = config['model_weights_path']  # Path to your trained model
-        cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.6  # Set threshold for inference
+        cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = config["inference_threshold"]  # Set threshold for inference
         cfg.MODEL.ROI_HEADS.NUM_CLASSES = len(config['classes']['class_names'])  # Update based on your dataset's number of classes (7 in your case)
         cfg.MODEL.DEVICE = "cpu"  # Force using CPU
         logging.info("Model setup successful.")
@@ -169,4 +169,3 @@ def process_pdf(pdf_path, output_dir):
     except Exception as e:
         logging.error(f"An error occurred during PDF processing: {e}")
         return None
-
