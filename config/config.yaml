@@ -1,5 +1,16 @@
 # config/config.yaml
 
+
 dpi: 300
+
 output_base: 'outputs'
 ocr_language: 'eng'
+
+# Path to the trained model
+model_weights_path: 'models/model_final_02.pth'  # Path to the trained model
+
+# Classes for the model
+classes:
+  class_names: ['Text', 'Table', 'Image', 'Figure', 'Page Number', 'Header and Footer', 'Form']
+  text_classes: ['Text', 'Page Number', 'Header and Footer']
+  image_classes: ['Table', 'Image', 'Figure', 'Form']

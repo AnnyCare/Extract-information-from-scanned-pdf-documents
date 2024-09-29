@@ -13,6 +13,10 @@ from detectron2 import model_zoo  # Ensure this is imported
 import numpy as np
 import json
 import zipfile
+from src.utils import load_config
+
+config = load_config('config/config.yaml')
+
 
 # Set the environment variable for torch cache
 os.environ['TORCH_HOME'] = r'C:\Users\Public\pdfproject\torch_cache'
@@ -35,13 +39,13 @@ def zip_results(folders, zip_name):
 setup_logger()
 
 # Define function to set up configuration and load the trained model
-def setup_predictor(model_weights_path):
+def setup_predictor():
     # Configure the model for inference
     cfg = get_cfg()
     cfg.merge_from_file(model_zoo.get_config_file("COCO-Detection/faster_rcnn_R_50_FPN_3x.yaml"))  # Adjust if your model config is different
-    cfg.MODEL.WEIGHTS = model_weights_path  # Path to your trained model
-    cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.5  # Set threshold for inference
-    cfg.MODEL.ROI_HEADS.NUM_CLASSES = 8  # Update based on your dataset's number of classes (7 in your case)
+    cfg.MODEL.WEIGHTS = config['model_weights_path']  # Path to your trained model
+    cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.6  # Set threshold for inference
+    cfg.MODEL.ROI_HEADS.NUM_CLASSES = len(config['classes']['class_names'])  # Update based on your dataset's number of classes (7 in your case)
     cfg.MODEL.DEVICE = "cpu"  # Force using CPU
     return DefaultPredictor(cfg)
 
@@ -51,19 +55,17 @@ def convert_pdf_to_images(pdf_path):
     return convert_from_path(pdf_path)
 
 # Define function to process a PDF and generate output
-def process_pdf(pdf_path, model_weights_path, output_dir):
+def process_pdf(pdf_path, output_dir):
     # Ensure output directory exists
     os.makedirs(output_dir, exist_ok=True)
 
     # Load trained model
-    predictor = setup_predictor(model_weights_path)
+    predictor = setup_predictor()
 
     # Manually define class names as per your dataset
-    class_names = ['Text', 'Table', 'Image', 'Figure', 'Page Number', 'Header and Footer', 'Form']
-
-    # Define the classes that require OCR processing
-    text_classes = ['Text', 'Page Number', 'Header and Footer']
-    image_classes = ['Table', 'Image', 'Figure', 'Form']
+    class_names = config['classes']['class_names']
+    text_classes = config['classes']['text_classes']
+    image_classes = config['classes']['image_classes']
 
     # Create a folder for each class in the output directory
     for class_name in class_names:

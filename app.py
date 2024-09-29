@@ -12,9 +12,8 @@ app = Flask(__name__)
 # Load configuration
 config = load_config('config/config.yaml')
 
-# User input: Path to the model, PDF, and output directory
-model_weights_path = 'models/model_final_02.pth'  # Path to the trained model
-output_dir = 'extracted_files'  # Path where results will be saved
+# Path to output directory
+output_dir = config["output_base"]  # Path where results will be saved
 
 # Process the PDF
 
@@ -56,7 +55,7 @@ def upload_file():
             # Process the uploaded file
             try:
                 # zip_file_path = process_pdf(file_path, config)
-                zip_file_path = process_pdf(file_path, model_weights_path, output_dir)
+                zip_file_path = process_pdf(file_path, output_dir)
                 # Extract just the filename part from the full zip file path
                 zip_filename = os.path.basename(zip_file_path)
 
