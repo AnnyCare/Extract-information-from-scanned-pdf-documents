@@ -51,7 +51,7 @@ def setup_predictor():
 # Function to convert PDF pages to images
 def convert_pdf_to_images(pdf_path):
     try:
-        images = convert_from_path(pdf_path)
+        images = convert_from_path(pdf_path, dpi=config["dpi"])
         logging.info(f"PDF converted to images: {pdf_path}")
         return images
     except Exception as e:
