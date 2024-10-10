@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8">
+    <title>Document Extraction Application</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Link to external CSS file -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="VisionX Logo">
+        </div>
+        <h1>Document Extraction Application</h1>
+    </header>
+
+    <main class="container">
+        <section class="upload-section">
+            <h2>Upload a PDF Document</h2>
+            {% if message %}
+                <p class="message">{{ message }}</p>
+            {% endif %}
+            <form method="post" enctype="multipart/form-data">
+                <label for="file-upload" class="custom-file-upload">
+                    Select PDF File
+                </label>
+                <input id="file-upload" type="file" name="file" accept=".pdf">
+                <!-- Display selected file name -->
+                <p id="file-name" class="file-name"></p>
+                <input type="submit" value="Upload and Process" id="submit-button" disabled>
+            </form>
+            {% if zip_filename %}
+                <p>Your file has been processed. <a href="{{ url_for('download_file', filename=zip_filename) }}" id="download-link">Download Results</a></p>
+            {% endif %}
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Document Extraction Application - VisionX</p>
+    </footer>
+
+    <!-- Link to external JavaScript file -->
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

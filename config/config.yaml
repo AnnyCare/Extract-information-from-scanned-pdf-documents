@@ -1,0 +1,18 @@
+# config/config.yaml
+
+
+dpi: 200
+
+output_base: 'outputs'
+ocr_language: 'eng'
+
+# Path to the trained model
+model_weights_path: 'models/model_final_05.pth'  # Path to the trained model
+inference_threshold: 0.7  # threshold for inference
+
+
+# Classes for the model
+classes:
+  class_names: ['Text', 'Table', 'Image', 'Figure', 'Page Number', 'Header and Footer', 'Form']
+  text_classes: ['Text', 'Page Number', 'Header and Footer']
+  image_classes: ['Table', 'Image', 'Figure', 'Form']

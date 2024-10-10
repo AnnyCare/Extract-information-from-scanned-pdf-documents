@@ -1,0 +1,31 @@
+
+# Ignore Python bytecode files
+__pycache__/
+*.py[cod]
+
+# Ignore virtual environment directories
+venv/
+env/
+yunus/
+myenv/
+.venv/
+
+# Ignore data output directories
+outputs
+.history
+detectron2
+extracted_files
+extracted_images
+extracted_text
+extracted_document
+pdf-for-testing
+uploads
+models
+archive
+pdf-for-test
+
+
+
+# Ignore system files
+.DS_Store
+Thumbs.db
